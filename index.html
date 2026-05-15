@@ -649,9 +649,22 @@
       ref: 'reference',
       txn: 'txnId',
     };
+
+    const formatDate = (date) => {
+      return date.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
+    };
+
     for (const [key, id] of Object.entries(map)) {
       const val = params.get(key);
       if (val) document.getElementById(id).textContent = val;
+    }
+
+    if (!params.has('date') && !params.has('paymentDate')) {
+      document.getElementById('paymentDate').textContent = formatDate(new Date());
     }
   })();
 </script>
